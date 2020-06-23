@@ -10,7 +10,7 @@ nltk.download('punkt')
 
 # add path
 import sys
-sys.path.append("../../espnet")
+sys.path.append("../../../espnet")
 
 # define E2E-TTS model
 from argparse import Namespace
@@ -31,15 +31,15 @@ device = torch.device("cpu")
 
 # set path
 trans_type = "phn"
-dict_path = "artifacts/tacotron2/train_clean_460_units.txt"
-model_path = "artifacts/tacotron2/model.best"
+dict_path = "../artifacts/tacotron2/train_clean_460_units.txt"
+model_path = "../artifacts/tacotron2/model.best"
 
 
 # set path
-vocoder_path = "artifacts/parallelwavegan/model.pkl"
-vocoder_conf = "artifacts/parallelwavegan/config.yml"
+vocoder_path = "../artifacts/parallelwavegan/model.pkl"
+vocoder_conf = "../artifacts/parallelwavegan/config.yml"
 
-xvectors_path = "artifacts/xvectors.pkl"
+xvectors_path = "../artifacts/xvectors.pkl"
 
 xvectors = pickle.load(open(xvectors_path, mode='rb'))
 k = list(xvectors.keys())
@@ -112,6 +112,7 @@ import time
 
 pad_fn = torch.nn.ReplicationPad1d(
     config["generator_params"].get("aux_context_window", 0))
+vocoder_class = config.get("generator_type", "ParallelWaveGANGenerator")
 use_noise_input = vocoder_class == "ParallelWaveGANGenerator"
 
 ys = []
