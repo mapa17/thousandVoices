@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+TTS/artifacts/*
+!TTS/artifacts/*.md
+
 # Distribution / packaging
 .Python
 build/
