@@ -18,10 +18,6 @@ from IPython.display import display, Audio
 import base64
 #import shutil
 
-## Test in browser by going to
-# http://localhost:5000/image?N=64
-# http://localhost:5000/images?N=64&S=50
-
 # Name of the apps module package
 app = Flask(__name__)
 flask_env = {
@@ -35,6 +31,10 @@ flask_env = {
 def meta_data():
 	return jsonify(flask_env['user_meta'])
 
+
+## Test in browser by going to
+# http://localhost:5000/TTS?S=Hello%20Bob,%20how%20are%20you%20doing
+
 # Can be called with /TTS?S=SomeText
 @app.route("/TTS")
 def TTS():
@@ -45,10 +45,6 @@ def TTS():
 
     speach = flask_env['model'].predict(('TTS', (sentence, speaker)))
     a = Audio(speach[0].view(-1).cpu().numpy(), rate=24000)
-    web = base64.b64encode(a.data)
-
-    prefix = 'data:audio/wav;base64,'
-    result = f'{prefix}{str(web, "utf-8")}'
     result = Response(a.data, mimetype="audio/x-wav")
 
     return result
