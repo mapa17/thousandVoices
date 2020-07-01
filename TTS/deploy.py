@@ -55,7 +55,7 @@ def _deploy(package: str):
     model = mlflow.pyfunc.load_model(package)
 
     # Load package metadata
-    with open(model.context.artifacts["meta"], 'rb') as handle:
+    with open(model._model_impl.context.artifacts["meta"], 'rb') as handle:
         meta = pickle.load(handle)
 
     # Load user metadata

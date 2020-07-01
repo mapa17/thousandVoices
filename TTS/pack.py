@@ -22,7 +22,6 @@ class ModelWrapper(mlflow.pyfunc.PythonModel):
     def load_context(self, context):
         import torch
         import pickle
-        import model
 
         # Load package meta
         with open(context.artifacts["meta"], 'rb') as handle:
@@ -41,8 +40,6 @@ class ModelWrapper(mlflow.pyfunc.PythonModel):
  
     # Create a predict function for our models
     def predict(self, context, model_input):
-        import model
-
         inference_type, args = model_input
         if inference_type == 'TTS':
             sentences, speaker = args

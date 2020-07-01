@@ -135,18 +135,8 @@ for spemb, input_text in zip(sps, sentences):
   print(f"RTF = {rtf:5f}")
   ys.append(y)
 
-#from IPython.display import display, Audio
-#for y in ys:
-#  display(Audio(y.view(-1).cpu().numpy(), rate=config["sampling_rate"]))
-
+# Store the utterances as a pickle
+print(f'Storing generated utterances to utterance.pkl')
 with open('utterance.pkl', 'wb') as fo:
     pickle.dump(ys, fo)
 
-#foutname = 'speaker'
-#for i, y in enumerate(ys):
-    #fo = f'{foutname}{i:02d}.wav'
-    #print(f'Writing {fo} ...')
-    #with wave.open(fo, mode='wb') as wout:
-    #    # Set wave: Mono, 16Bit, 22khz, nFrames, Uncompressed
-    #    wout.setparams((1, 2, config['sampling_rate'], y.shape[0], 'NONE', 'NONE'))
-    #    wout.writeframes(y.view(-1).cpu().numpy())
